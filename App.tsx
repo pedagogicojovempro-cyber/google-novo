@@ -75,7 +75,7 @@ const App: React.FC = () => {
               <Zap className="text-white h-6 w-6" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-white tracking-tight">TrafficAds AI</h1>
+              <h1 className="text-xl font-bold text-white tracking-tight">Meu Gestor de tráfego</h1>
               <p className="text-xs text-indigo-400 font-medium">Gestor de Tráfego Inteligente</p>
             </div>
           </div>
