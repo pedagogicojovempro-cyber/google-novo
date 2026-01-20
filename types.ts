@@ -4,6 +4,12 @@ export interface Message {
   isError?: boolean;
 }
 
+export interface AbTest {
+  element: string; // Ex: Headline, Copy, Creative
+  variation: string;
+  rationale: string;
+}
+
 export interface CampaignStrategy {
   headline: string;
   copy: string;
@@ -11,6 +17,9 @@ export interface CampaignStrategy {
   audience: string;
   segmentation: string;
   objective: string;
+  budget: string;
+  estimatedResults: string; // Novo campo para estimativa
+  abTestSuggestion: AbTest;
 }
 
 export interface ImageGenerationResult {

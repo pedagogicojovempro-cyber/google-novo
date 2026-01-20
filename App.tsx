@@ -13,19 +13,11 @@ const App: React.FC = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Initial greeting from the Traffic Manager
-    const initialGreeting = async () => {
-      setIsLoading(true);
-      try {
-        const response = await sendMessageToGemini("Olá, vamos começar a criar minha campanha.");
-        setMessages([{ role: 'model', text: response.text }]);
-      } catch (error) {
-        console.error("Init error", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    initialGreeting();
+    // Initial greeting from the Traffic Manager - Hardcoded to save API quota
+    setMessages([{ 
+      role: 'model', 
+      text: "Olá! Sou o seu Gestor de Tráfego. 🚀\n\nVamos criar uma campanha incrível para o seu negócio de forma simples?\n\nPara começar, **me conte o que você vende ou qual serviço você oferece?**" 
+    }]);
   }, []);
 
   const scrollToBottom = () => {
@@ -51,8 +43,8 @@ const App: React.FC = () => {
       if (response.strategy) {
         setStrategy(response.strategy);
       }
-    } catch (error) {
-      setMessages(prev => [...prev, { role: 'model', text: "Ocorreu um erro ao processar sua resposta. Verifique sua conexão ou a chave de API.", isError: true }]);
+    } catch (error: any) {
+      setMessages(prev => [...prev, { role: 'model', text: error.message || "Ocorreu um erro inesperado.", isError: true }]);
     } finally {
       setIsLoading(false);
     }
@@ -110,7 +102,7 @@ const App: React.FC = () => {
             <div className="pb-4">
               <CampaignDisplay strategy={strategy} />
               <div className="text-center mt-8 p-4 text-slate-500 text-sm">
-                <p>A campanha foi gerada! Você pode continuar a conversa acima para refinar ou pedir um Teste A/B.</p>
+                <p>A campanha está pronta! Você pode continuar a conversa acima para fazer ajustes e o PDF será atualizado automaticamente.</p>
               </div>
             </div>
           )}
@@ -126,7 +118,7 @@ const App: React.FC = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Descreva seu produto, objetivo ou responda ao assistente..."
+              placeholder="Descreva seu produto, objetivo ou peça ajustes na campanha..."
               disabled={isLoading}
               className="flex-grow bg-slate-800 text-white placeholder-slate-500 border border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all disabled:opacity-50"
             />
